@@ -1,17 +1,22 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h2>Basic WebSocket example</h2>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  created() {
+    let ws = new WebSocket("ws://localhost:40510");
+    
+    ws.onopen = () => {
+      console.log('Websocket connection open');
+      ws.send('Client is connected');
+    }
+
+    ws.onmessage = event => console.log(event);
   }
 }
 </script>
